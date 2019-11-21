@@ -10,34 +10,151 @@
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- CSS -->
+
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .row {
+            line-height: 0;
+        }
+
+        .wall {
+            background-color: blue;
+            height: 40px;
+            width: 40px;
+            display: inline-block;
+        }
+
+        .sushi {
+            background-color: black;
+            height: 40px;
+            width: 40px;
+            display: inline-block;
+            background-image: url('sushi.png');
+            background-size: contain;
+        }
+
+        .onigiri {
+            background-color: black;
+            height: 40px;
+            width: 40px;
+            display: inline-block;
+            background-image: url('onigiri.png');
+            background-size: contain;
+        }
+
+        .blank {
+            background-color: black;
+            height: 40px;
+            width: 40px;
+            display: inline-block;
+        }
+
+        #ninjaman {
+            background-color: black;
+            height: 40px;
+            width: 40px;
+            display: inline-block;
+            background-image: url('ninja.gif');
+            background-size: contain;
+            position: absolute;
+        }
+    </style>
+
+    <!-- End of CSS -->
+
     <script type="text/javascript">
 
         var socket = io();
-       
 
-        var name = prompt('HELLO! What is your name?')
+        var name = prompt('HELLO! What is your name?');
+
+        // Creating the world
+
+        // var world = [
+        //     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        //     [1, 2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 2, 1],
+        //     [1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
+        //     [1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1],
+        //     [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+        //     [1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1],
+        //     [1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 3, 1, 0, 1],
+        //     [1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1],
+        //     [0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 3, 3, 3, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+        //     [1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1],
+        //     [1, 0, 1, 3, 1, 0, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1],
+        //     [1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1],
+        //     [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1],
+        //     [1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 3, 1, 3, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 1],
+        //     [1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1],
+        //     [1, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 2, 1],
+        //     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        // ];
+        var worldDict = {
+            0: 'blank',
+            1: 'wall',
+            2: 'sushi',
+            3: 'onigiri',
+        };
+
+
+        function drawWorld(data) {
+            var output = "";
+
+            for (var row = 0; row < data.length; row++) {
+                output += "<div class = 'row'>"
+                for (var x = 0; x < data[row].length; x++) {
+                    output += "<div class = '" + worldDict[data[row][x]] + "')></div>";
+                }
+                output += "</div>"
+            }
+
+
+            return output;
+            console.log('CHeck')
+        };
+
+        // End of World
+
+        // Create Player
 
         $(document).ready(function () {
-            socket.emit('user_entered', name)
-            socket.on('enter_msg', function(data){
-                $("#msgboard").append('<p>'+data+' has entered the game</p>')
+            socket.on('build_World', function(worldData){
+                console.log(worldData);
+                $('#world').html(drawWorld(worldData));
+                console.log('hello');
             })
-            $('#msgboard').append('<p> Welcome ' + name+'!</p>')
-            $('#sub').click(function() {
+            socket.emit('user_entered', name)
+            socket.on('enter_msg', function (data) {
+                $("#msgboard").append('<p>' + data + ' has entered the game</p>')
+            })
+            $('#msgboard').append('<p> Welcome ' + name + '!</p>')
+            $('#sub').click(function () {
                 socket.emit("sending_msg", { sender: name, msg: $('#msg').val() })
                 $('#msg').val('')
             })
-            socket.on('all_msgs',function(data){
+            socket.on('all_msgs', function (data) {
                 console.log(data)
-                $('#msgboard').append('<p><span class="color">'+data.sender+':<span> '+data.msg+'</p>')
+                $('#msgboard').append('<p><span class="color">' + data.sender + ':<span> ' + data.msg + '</p>')
             })
         })
 
 
     </script>
 </head>
+
 <body>
-    <div class="container col-8" align=center>
+    <div class="container col-12" align="center">
+
+        
+
+        <div id='world'></div>
+
         <div>
             <p id='msgboard'></p>
         </div>
@@ -47,4 +164,5 @@
         </div>
     </div>
 </body>
+
 </html>
