@@ -19,6 +19,9 @@ app.get('/game_1', (req, res) => {
 
 io.on('connection', function (socket) {
     console.log('socket connected <3 <3 <3')
+    socket.on('user_entered', function(data){
+        socket.broadcast.emit('enter_msg', data)
+    })
     socket.on('sending_msg', function (data) {
         console.log(data);
         chat += data;

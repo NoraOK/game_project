@@ -12,16 +12,22 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script type="text/javascript">
 
-        var io = io();
+        var socket = io();
+       
 
         var name = prompt('HELLO! What is your name?')
 
         $(document).ready(function () {
-            $('#msgboard').append('<p>' + name + ' entered game</p>')
-            $('#sub').click(function () {
-                io.emit("sending_msg", { msg: $('#msg').val(), sender: name })
+            socket.emit('user_entered', name)
+            socket.on('enter_msg', function(data){
+                $("#msgboard").append('<p>'+data+' has entered the game</p>')
             })
-            io.on('all_msgs',function(data){
+            $('#msgboard').append('<p> Welcome ' + name+'!</p>')
+            $('#sub').click(function() {
+                socket.emit("sending_msg", { sender: name, msg: $('#msg').val() })
+                $('#msg').val('')
+            })
+            socket.on('all_msgs',function(data){
                 console.log(data)
                 $('#msgboard').append('<p><span class="color">'+data.sender+':<span> '+data.msg+'</p>')
             })
@@ -36,7 +42,7 @@
             <p id='msgboard'></p>
         </div>
         <div>
-            <input type="text" name="" id="msg">
+            <input type="text" id="msg">
             <input type="button" class='btn btn-warning' id='sub' value='Send'>
         </div>
     </div>
