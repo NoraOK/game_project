@@ -49,19 +49,19 @@
 
 
             return output;
-            console.log('CHeck')
+            console.log('World Created')
         };
 
         // End of World
 
         // Create Player
 
+        socket.on('build_World', function (worldData) {
+            console.log(worldData);
+            $('#world').html(drawWorld(worldData));
+            console.log('hello');
+        })
         $(document).ready(function () {
-            socket.on('build_World', function (worldData) {
-                console.log(worldData);
-                $('#world').html(drawWorld(worldData));
-                console.log('hello');
-            })
             socket.emit('user_entered', name)
             socket.on('enter_msg', function (data) {
                 $("#msgboard").append('<p>' + data + ' has entered the game</p>')
