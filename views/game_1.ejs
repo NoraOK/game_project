@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Game #1</title>
     <link rel="stylesheet" href="game_1.css" type="text/css">
-
     <link
         href="https://fonts.googleapis.com/css?family=Barriecito|Monoton|Press+Start+2P|Turret+Road|Unica+One|VT323&display=swap"
         rel="stylesheet">
@@ -16,16 +15,11 @@
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-
-
-    <!-- End of CSS -->
-
     <script type="text/javascript">
 
         var socket = io();
 
-        var name = prompt('HELLO! What is your name?');
+        var name = prompt('Enter you name to play:');
 
         // Creating the world
 
@@ -73,7 +67,11 @@
             })
             socket.on('all_msgs', function (data) {
                 console.log(data)
-                $('#msgboard').append('<p><span class="color">' + data.sender + ':<span> ' + data.msg + '</p>')
+                if(data.sender == name){
+                    $('#msgboard').append('<p><span class="color">' + data.sender + ':</span> ' + data.msg + '</p>')
+                }else{
+                    $('#msgboard').append('<p><span class="color1">' + data.sender + ':</span> ' + data.msg + '</p>')
+                }
             })
         })
 
@@ -84,12 +82,14 @@
     <%- include header.ejs %>
     <div class="container col-12" align="center">
         <div id='world'></div>
-        <div>
-            <p id='msgboard'></p>
-        </div>
-        <div class='form'>
-            <input type="text" id="msg" class='col-11'>
-            <input type="button" class='btn btn-warning' id='sub' value='Send'>
+        <div class="chatroom">
+            <div class="msgboard">
+                <p id='msgboard'></p>
+            </div>
+            <div class='form'>
+                <input type="text" id="msg">
+                <input type="button" class='btn btn-warning' id='sub' value='Send'>
+            </div>
         </div>
     </div>
 </body>
