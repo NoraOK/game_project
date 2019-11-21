@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express();
-app.use(express.static(__dirname + '/static'));
+app.use(express.static(__dirname + '/static/css'));
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
 app.use(express.urlencoded({ extended: true }));
-const server = app.listen(8001, () => console.log('listening on port 8000 <3'));
+const server = app.listen(8001, () => console.log('listening on port 8001 <3'));
 const io = require('socket.io')(server);
 
 var chat = {}

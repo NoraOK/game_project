@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
+    <link rel="stylesheet" href="index.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Barriecito|Monoton|Press+Start+2P|Turret+Road|Unica+One|VT323&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -14,11 +16,14 @@
     </script>
 </head>
 <body>
-    <h1>WELCOME TO GAMETOWN</h1>
-    <a href="/game_1">
-        <div class="jumbotron">
-            <p>Click to play!</p>
+ <%- include header.ejs %>
+
+    <div class="container col-12">
+        <div class="tron col-3">
+            <a href="/game_1" class='game_1'>
+                <p>Click here to play PACMAN!</p>
+            </a>
         </div>
-    </a>
+    </div>
 </body>
 </html>

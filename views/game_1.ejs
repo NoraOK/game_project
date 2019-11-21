@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Game #1</title>
+    <link rel="stylesheet" href="game_1.css" type="text/css">
+
+    <link href="https://fonts.googleapis.com/css?family=Barriecito|Monoton|Press+Start+2P|Turret+Road|Unica+One|VT323&display=swap" rel="stylesheet">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -14,15 +18,20 @@
 
         var socket = io();
        
-
         var name = prompt('HELLO! What is your name?')
 
         $(document).ready(function () {
+            // if(name !== null){
+                $('#msgboard').append('<p> Welcome ' + name+'!</p>')
+            //     console.log(name)
+            // }else{
+            //     var name = "Anonymous Player (creep)"
+            //     $('#msgboard').append('<p> Welcome ' + name+'!</p>')
+            // }
             socket.emit('user_entered', name)
             socket.on('enter_msg', function(data){
-                $("#msgboard").append('<p>'+data+' has entered the game</p>')
+                $("#msgboard").append('<p class="welcome">'+data+' has entered the game</p>')
             })
-            $('#msgboard').append('<p> Welcome ' + name+'!</p>')
             $('#sub').click(function() {
                 socket.emit("sending_msg", { sender: name, msg: $('#msg').val() })
                 $('#msg').val('')
@@ -33,16 +42,16 @@
             })
         })
 
-
     </script>
 </head>
 <body>
-    <div class="container col-8" align=center>
+    <%- include header.ejs %>
+    <div class="container col-12">
         <div>
             <p id='msgboard'></p>
         </div>
-        <div>
-            <input type="text" id="msg">
+        <div class='form'>
+            <input type="text" id="msg"class='col-11'>
             <input type="button" class='btn btn-warning' id='sub' value='Send'>
         </div>
     </div>

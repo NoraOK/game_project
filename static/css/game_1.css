@@ -1,0 +1,14 @@
+.container{
+    border: double 1px black;
+    margin: 20px 0px;
+    padding-bottom: 5px;
+    height: 200px;
+}
+.welcome{
+    font-family: 'Unica One', cursive;
+    color: rgb(252, 74, 3)
+}
+
+.form{
+    vertical-align: bottom;
+}
