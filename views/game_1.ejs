@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Game #1</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript">
+
+        var io = io();
+
+        var name = prompt('HELLO! What is your name?')
+
+        $(document).ready(function () {
+            $('#msgboard').append('<p>' + name + ' entered game</p>')
+            $('#sub').click(function () {
+                io.emit("sending_msg", { msg: $('#msg').val(), sender: name })
+            })
+            io.on('all_msgs',function(data){
+                console.log(data)
+                $('#msgboard').append('<p><span class="color">'+data.sender+':<span> '+data.msg+'</p>')
+            })
+        })
+
+
+    </script>
+</head>
+<body>
+    <div class="container col-8" align=center>
+        <div>
+            <p id='msgboard'></p>
+        </div>
+        <div>
+            <input type="text" name="" id="msg">
+            <input type="button" class='btn btn-warning' id='sub' value='Send'>
+        </div>
+    </div>
+</body>
+</html>
