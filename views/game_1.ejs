@@ -23,8 +23,9 @@
         var worldDict = {
             0: 'blank',
             1: 'wall',
-            2: 'sushi',
-            3: 'onigiri',
+            2: 'apple',
+            3: 'dots',
+            4: 'dotlets'
         };
 
         function drawWorld(data) {
@@ -33,7 +34,15 @@
             for (var row = 0; row < data.length; row++) {
                 output += "<div class = 'row'>"
                 for (var x = 0; x < data[row].length; x++) {
-                    output += "<div class = '" + worldDict[data[row][x]] + "')></div>";
+                    if (worldDict[data[row][x]] == 'apple') {
+                        output += "<div class = '" + worldDict[data[row][x]] + "'><img src='/images/apple.png' height='40px' width='40px'></div>";
+                    } else if (worldDict[data[row][x]] == 'dots') {
+                        output += "<div class = '" + worldDict[data[row][x]] + "'><img src='/images/dot.png' height='20px' width='20px'></div>";
+                    } else if (worldDict[data[row][x]] == 'dotlets') {
+                        output += "<div class = '" + worldDict[data[row][x]] + "'><img src='/images/dot.png' height='10px' width='10px'></div>";
+                    } else {
+                        output += "<div class = '" + worldDict[data[row][x]] + "'></div>";
+                    }
                 }
                 output += "</div>"
             }
@@ -52,28 +61,65 @@
             player.left = player.x * 40 + 'px'
         }
 
+        function drawScoreboard(player, ninjas) {
+            if (player.name == ninjas[0]) {
+                $('#scoreboard1').text(player.score)
+            } 
+            if (player.name == ninjas[1]) {
+                $('#scoreboard2').text(player.score)
+            } 
+            if (player.name == ninjas[2]) {
+                $('#scoreboard3').text(player.score)
+            } 
+            if (player.name == ninjas[3]) {
+                $('#scoreboard4').text(player.score)
+            }
+        }
 
         socket.on('build_World', function (worldData) {
             $('#world').html(drawWorld(worldData));
         })
-        socket.on('move_Ninja1', function (ninja1, ninjas) {
-            console.log(ninja1, 'logging_all_ninjas')
+        socket.on('move_Ninja1', function (ninja1, ninjas, move) {
             drawNinjaman(ninja1)
             console.log(ninja1.name, "player 1 moved")
             $('#ninjaman1').css({
                 "top": ninja1.top,
                 "left": ninja1.left,
             })
+            $('#pacman1').attr("class","ninjaman "+move+"")
+            drawScoreboard(ninja1, ninjas)
         })
 
-        socket.on('move_Ninja2', function (ninja2, ninjas) {
-            console.log(ninja2, 'logging_all_ninjas')
+        socket.on('move_Ninja2', function (ninja2, ninjas, move) {
             drawNinjaman(ninja2)
             console.log(ninja2.name, "player 2 moved")
             $('#ninjaman2').css({
                 "top": ninja2.top,
                 "left": ninja2.left,
             })
+            $('#pacman2').attr("class","ninjaman "+move+"")
+            drawScoreboard(ninja2, ninjas)
+        })
+
+        socket.on('move_Ninja3', function (ninja3, ninjas, move) {
+            drawNinjaman(ninja3)
+            console.log(ninja3.name, "player 3 moved")
+            $('#ninjaman3').css({
+                "top": ninja3.top,
+                "left": ninja3.left,
+            })
+            $('#pacman3').attr("class","ninjaman "+move+"")
+            drawScoreboard(ninja3, ninjas)
+        })
+        socket.on('move_Ninja4', function (ninja4, ninjas, move) {
+            drawNinjaman(ninja4)
+            console.log(ninja4.name, "player 4 moved")
+            $('#ninjaman4').css({
+                "top": ninja4.top,
+                "left": ninja4.left,
+            })
+            $('#pacman4').attr("class","ninjaman "+move+"")
+            drawScoreboard(ninja4, ninjas)
         })
 
         $(document).ready(function () {
@@ -150,8 +196,24 @@
 
 
         <div id='world'></div>
-        <div id='ninjaman1' class='ninjaman'></div>
-        <div id='ninjaman2' class='ninjaman'></div>
+        <div id='scoreboard1' class='scoreboard' style='top: 0px; left:0px'>0</div>
+        <div id='scoreboard2' class='scoreboard' style='top: 0px; left:1200px'>0</div>
+        <div id='scoreboard3' class='scoreboard' style='top: 640px; left:0px'>0</div>
+        <div id='scoreboard4' class='scoreboard' style='top: 640px; left:1200px'>0</div>
+        <div id='ninjaman1' class='ninjaman'>
+            <img id='pacman1' src='/images/pacman.png' height='40px' width='40px'>
+        </div>
+        <div id='ninjaman2' class='ninjaman'>
+            <img id='pacman2'src='/images/pacman.png' height='40px' width='40px'>
+        </div>
+        <div id='ninjaman3' class='ninjaman'>
+            <img id='pacman3'src='/images/pacman.png' height='40px' width='40px'>
+        </div>
+
+        <div id='ninjaman4' class='ninjaman'>
+            <img id='pacman4'src='/images/pacman.png' height='40px' width='40px'>
+        </div>
+
 
 
         <div class="chatroom">
