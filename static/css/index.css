@@ -1,14 +1,17 @@
 .tron{
-    margin-top: 20px;
+    margin-top: 10px;
     text-align: center;
-    margin-left: 37%;
     background-color: rgba(252, 74, 3);
     box-shadow: 4px 4px 4px gray;
     border-radius: 10px;
     height: 100px;
     padding-top: 35px;
-}
 
+}
+.container{
+  background-image: linear-gradient(to bottom right, rgb(9, 3, 48), rgba(18, 39, 158, 0.8));
+  height: 100vw;
+}
 .game_1 {
     text-decoration: none;
 }
@@ -34,6 +37,12 @@ ul{
     list-style: none;
 
 }
+.jumbo {
+    margin-top: 200px;
+    display:inline-block;
+    width:49%;
+}
 
-
-
+img{
+    border-radius: 10px;
+}
