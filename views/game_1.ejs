@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Game #1</title>
-    <link rel="stylesheet" href="game_1.css" type="text/css">
+    <link rel="stylesheet" href="css/game_1.css" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Barriecito|Monoton|Press+Start+2P|Turret+Road|Unica+One|VT323&display=swap"
         rel="stylesheet">
@@ -58,9 +58,9 @@
         $(document).ready(function () {
             socket.emit('user_entered', name)
             socket.on('enter_msg', function (data) {
-                $("#msgboard").append('<p>' + data + ' has entered the game</p>')
+                $("#msgboard").append('<p class="welcome">' + data + ' has entered the game</p>')
             })
-            $('#msgboard').append('<p> Welcome ' + name + '!</p>')
+            $('#msgboard').append('<p class="welcome"> Welcome ' + name + '!</p>')
             $('#sub').click(function () {
                 socket.emit("sending_msg", { sender: name, msg: $('#msg').val() })
                 $('#msg').val('')

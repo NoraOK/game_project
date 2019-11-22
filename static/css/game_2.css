@@ -1,0 +1,59 @@
+.container{
+    padding-bottom: 5px;
+
+}
+.welcome{
+    font-family: 'Unica One', cursive;
+    color: rgb(252, 74, 3)
+}
+
+.chatroom{
+    display: inline-block;
+    border: black 1px solid;
+    margin-left: 10px;
+    height: 680px;
+    width: 400px
+}
+
+#world{
+    vertical-align: top;
+    display: inline-block;
+    height: 680px;
+    width: 1210px;
+}
+
+.msgboard{
+    display:inline-block;
+    overflow: scroll;
+    width: 400px;
+    text-align: left;
+    height: 600px;
+}
+.form{
+    vertical-align: bottom;
+}
+
+.color{
+    color: red;
+}
+.color1{
+    color: blue;
+}
+
+img{
+    width: 250px;
+
+}
+#scissors{
+    width: 300px;
+}
+#world{
+    margin-top: 75px;
+}
+
+button{
+    padding-top: 75px;
+    text-decoration: none;
+    border: none;
+    background-color: white;
+}
