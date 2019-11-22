@@ -14,22 +14,33 @@
     display: inline-block;
 }
 
-.sushi {
+.apple {
     background-color: black;
     height: 40px;
     width: 40px;
     display: inline-block;
-    background-image: url('images/sushi.png');
+    background-image: url('./images/apple.png');
     background-size: contain;
 }
 
-.onigiri {
+.dots {
     background-color: black;
     height: 40px;
     width: 40px;
     display: inline-block;
-    background-image: url('images/onigiri.png');
+    color: white;
     background-size: contain;
+    padding: 10px;
+}
+
+.dotlets {
+    background-color: black;
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    color: white;
+    background-size: contain;
+    padding: 15px;
 }
 
 .blank {
@@ -40,15 +51,22 @@
 }
 
 .ninjaman {
-    background-color: red;
+
     height: 40px;
     width: 40px;
     display: inline-block;
-    background-image: url('/static/images/pacman.png');
     background-size: contain;
     position: absolute;
 }
-
+.scoreboard{
+    height: 40px;
+    width: 40px;
+    display: inline-block;
+    background-size: contain;
+    position: absolute;
+    color: white;
+    font-size: x-large;
+}
 .container{
     padding-bottom: 5px;
 
@@ -87,4 +105,16 @@
 }
 .color1{
     color: blue;
+}
+.rotateleft {
+    transform: rotate(180deg);
+}
+.rotateright {
+    transform: rotate(0deg);
+}
+.rotateup {
+    transform: rotate(270deg);
+}
+.rotatedown {
+    transform: rotate(90deg);
 }
