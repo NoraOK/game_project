@@ -37,32 +37,32 @@ ninjas = []
 NS = [
     ninjaman1 = {
         name: "",
-        x: 1,
-        y: 1,
+        x: 3,
+        y: 3,
         score: 0,
         top: 0,
         left: 0,
     },
     ninjaman2 = {
         name: "",
-        x: 29,
-        y: 1,
+        x: 27,
+        y: 3,
         score: 0,
         top: 0,
         left: 0,
     },
     ninjaman3 = {
         name: "",
-        x: 29,
-        y: 1,
+        x: 3,
+        y: 13,
         score: 0,
         top: 0,
         left: 0,
     },
     ninjaman4 = {
         name: "",
-        x: 29,
-        y: 1,
+        x: 27,
+        y: 13,
         score: 0,
         top: 0,
         left: 0,
@@ -141,23 +141,23 @@ io.on('connection', function (socket) {
         }
         ninjas.push(data)
         if (ninjas[0] && !ninjas[1]) {
-            NS[0].x = 1
-            NS[0].y = 1
+            NS[0].x = 3
+            NS[0].y = 3
             NS[0].name = ninjas[0]
         }
         if (ninjas[1] && !ninjas[2]) {
-            NS[1].x = 29
-            NS[1].y = 1
+            NS[1].x = 27
+            NS[1].y = 3
             NS[1].name = ninjas[1]
         }
         if (ninjas[2] && !ninjas[3]) {
-            NS[2].x = 1
-            NS[2].y = 15
+            NS[2].x = 3
+            NS[2].y = 13
             NS[2].name = ninjas[2]
         }
         if (ninjas[3]) {
-            NS[3].x = 29
-            NS[3].y = 15
+            NS[3].x = 27
+            NS[3].y = 13
             NS[3].name = ninjas[3]
         }
         console.log(NS[0], NS[1], NS[2], NS[3], ninjas, "all ninjas")
@@ -196,299 +196,304 @@ io.on('connection', function (socket) {
         3: "rotateup",
         4: "rotatedown",
     }
-
     // LEFT........................................................................................................................
-
+    
     socket.on('left', function (user) {
+        if (ninjas[3]) {
 
-        if (NS[0].name == user) {
-            if (world[NS[0].y][NS[0].x - 1] != 1) {
-                ninjaman1.x--;
+            if (NS[0].name == user) {
+                if (world[NS[0].y][NS[0].x - 1] != 1) {
+                    ninjaman1.x--;
+                }
+                if (world[NS[0].y][NS[0].x] == 2) {
+                    NS[0].score += 10;
+                }
+                if (world[NS[0].y][NS[0].x] == 3) {
+                    NS[0].score += 5;
+                }
+                if (world[NS[0].y][NS[0].x] == 4) {
+                    NS[0].score += 1;
+                }
+                world[NS[0].y][NS[0].x] = 0;
+                io.emit('move_Ninja1', NS[0], ninjas, controlsDict[1])
             }
-            if (world[NS[0].y][NS[0].x] == 2) {
-                NS[0].score += 10;
-            }
-            if (world[NS[0].y][NS[0].x] == 3) {
-                NS[0].score += 5;
-            }
-            if (world[NS[0].y][NS[0].x] == 4) {
-                NS[0].score += 1;
-            }
-            world[NS[0].y][NS[0].x] = 0;
-            io.emit('move_Ninja1', NS[0], ninjas, controlsDict[1])
-        }
-        if (NS[1].name == user) {
-            if (world[NS[1].y][NS[1].x - 1] != 1) {
-                ninjaman2.x--;
-            }
-            if (world[NS[1].y][NS[1].x] == 2) {
-                NS[1].score += 10;
-            }
-            if (world[NS[1].y][NS[1].x] == 3) {
-                NS[1].score += 5;
+            if (NS[1].name == user) {
+                if (world[NS[1].y][NS[1].x - 1] != 1) {
+                    ninjaman2.x--;
+                }
+                if (world[NS[1].y][NS[1].x] == 2) {
+                    NS[1].score += 10;
+                }
+                if (world[NS[1].y][NS[1].x] == 3) {
+                    NS[1].score += 5;
 
+                }
+                if (world[NS[1].y][NS[1].x] == 4) {
+                    NS[1].score += 1;
+                }
+                world[NS[1].y][NS[1].x] = 0;
+                io.emit('move_Ninja2', NS[1], ninjas, controlsDict[1])
             }
-            if (world[NS[1].y][NS[1].x] == 4) {
-                NS[1].score += 1;
+            if (NS[2].name == user) {
+                if (world[NS[2].y][NS[2].x - 1] != 1) {
+                    ninjaman3.x--;
+                }
+                if (world[NS[2].y][NS[2].x] == 2) {
+                    NS[2].score += 10;
+                }
+                if (world[NS[2].y][NS[2].x] == 3) {
+                    NS[2].score += 5;
+                }
+                if (world[NS[2].y][NS[2].x] == 4) {
+                    NS[2].score += 1;
+                }
+                world[NS[2].y][NS[2].x] = 0;
+                io.emit('move_Ninja3', NS[2], ninjas, controlsDict[1])
             }
-            world[NS[1].y][NS[1].x] = 0;
-            io.emit('move_Ninja2', NS[1], ninjas, controlsDict[1])
+            if (NS[3].name == user) {
+                if (world[NS[3].y][NS[3].x - 1] != 1) {
+                    ninjaman4.x--;
+                }
+                if (world[NS[3].y][NS[3].x] == 2) {
+                    NS[3].score += 10;
+                }
+                if (world[NS[3].y][NS[3].x] == 3) {
+                    NS[3].score += 5;
+                }
+                if (world[NS[3].y][NS[3].x] == 4) {
+                    NS[3].score += 1;
+                }
+                world[NS[3].y][NS[3].x] = 0;
+                io.emit('move_Ninja4', NS[3], ninjas, controlsDict[1])
+            }
         }
-        if (NS[2].name == user) {
-            if (world[NS[2].y][NS[2].x - 1] != 1) {
-                ninjaman3.x--;
+            io.emit('build_World', world)
+
+        })
+
+        // RIGHT........................................................................................................................
+
+        socket.on('right', function (user) {
+            if (ninjas[3]) {
+            if (NS[0].name == user) {
+                console.log(user, 'look')
+                if (world[NS[0].y][NS[0].x + 1] != 1) {
+                    ninjaman1.x++;
+                }
+                if (world[NS[0].y][NS[0].x] == 2) {
+                    NS[0].score += 10;
+                }
+                if (world[NS[0].y][NS[0].x] == 3) {
+                    NS[0].score += 5;
+                }
+                if (world[NS[0].y][NS[0].x] == 4) {
+                    NS[0].score += 1;
+                }
+                world[NS[0].y][NS[0].x] = 0;
+                io.emit('move_Ninja1', NS[0], ninjas, controlsDict[2])
             }
-            if (world[NS[2].y][NS[2].x] == 2) {
-                NS[2].score += 10;
+            if (NS[1].name == user) {
+                if (world[NS[1].y][NS[1].x + 1] != 1) {
+                    ninjaman2.x++;
+                }
+                if (world[NS[1].y][NS[1].x] == 2) {
+                    NS[1].score += 10;
+                }
+                if (world[NS[1].y][NS[1].x] == 3) {
+                    NS[1].score += 5;
+                }
+                if (world[NS[1].y][NS[1].x] == 4) {
+                    NS[1].score += 1;
+                }
+                world[NS[1].y][NS[1].x] = 0;
+                io.emit('move_Ninja2', NS[1], ninjas, controlsDict[2])
             }
-            if (world[NS[2].y][NS[2].x] == 3) {
-                NS[2].score += 5;
+            if (NS[2].name == user) {
+                if (world[NS[2].y][NS[2].x + 1] != 1) {
+                    ninjaman3.x++;
+                }
+                if (world[NS[2].y][NS[2].x] == 2) {
+                    NS[2].score += 10;
+                }
+                if (world[NS[2].y][NS[2].x] == 3) {
+                    NS[2].score += 5;
+                }
+                if (world[NS[2].y][NS[2].x] == 4) {
+                    NS[2].score += 1;
+                }
+                world[NS[2].y][NS[2].x] = 0;
+                io.emit('move_Ninja3', NS[2], ninjas, controlsDict[2])
             }
-            if (world[NS[2].y][NS[2].x] == 4) {
-                NS[2].score += 1;
+            if (NS[3].name == user) {
+                if (world[NS[3].y][NS[3].x + 1] != 1) {
+                    ninjaman4.x++;
+                }
+                if (world[NS[3].y][NS[3].x] == 2) {
+                    NS[3].score += 10;
+                }
+                if (world[NS[3].y][NS[3].x] == 3) {
+                    NS[3].score += 5;
+                }
+                if (world[NS[3].y][NS[3].x] == 4) {
+                    NS[3].score += 1;
+                }
+                world[NS[3].y][NS[3].x] = 0;
+                io.emit('move_Ninja4', NS[3], ninjas, controlsDict[2])
             }
-            world[NS[2].y][NS[2].x] = 0;
-            io.emit('move_Ninja3', NS[2], ninjas, controlsDict[1])
         }
-        if (NS[3].name == user) {
-            if (world[NS[3].y][NS[3].x - 1] != 1) {
-                ninjaman4.x--;
+            io.emit('build_World', world)
+        })
+
+        // UP........................................................................................................................
+
+        socket.on('up', function (user) {
+            if (ninjas[3]) {
+            if (NS[0].name == user) {
+                if (world[NS[0].y - 1][NS[0].x] != 1) {
+                    ninjaman1.y--;
+                }
+                if (world[NS[0].y][NS[0].x] == 2) {
+                    NS[1].score -= 10;
+                }
+                if (world[NS[0].y][NS[0].x] == 3) {
+                    NS[0].score += 5;
+                }
+                if (world[NS[0].y][NS[0].x] == 4) {
+                    NS[0].score += 1;
+                }
+                world[NS[0].y][NS[0].x] = 0;
+                io.emit('move_Ninja1', NS[0], ninjas, controlsDict[3])
             }
-            if (world[NS[3].y][NS[3].x] == 2) {
-                NS[3].score += 10;
+            if (NS[1].name == user) {
+                if (world[NS[1].y - 1][NS[1].x] != 1) {
+                    ninjaman2.y--;
+                }
+                if (world[NS[1].y][NS[1].x] == 2) {
+                    NS[1].score += 10;
+                }
+                if (world[NS[1].y][NS[1].x] == 3) {
+                    NS[1].score += 5;
+                }
+                if (world[NS[1].y][NS[1].x] == 4) {
+                    NS[1].score += 1;
+                }
+                world[NS[1].y][NS[1].x] = 0;
+                io.emit('move_Ninja2', NS[1], ninjas, controlsDict[3])
             }
-            if (world[NS[3].y][NS[3].x] == 3) {
-                NS[3].score += 5;
+            if (NS[2].name == user) {
+                if (world[NS[2].y - 1][NS[2].x] != 1) {
+                    ninjaman3.y--;
+                }
+                if (world[NS[2].y][NS[2].x] == 2) {
+                    NS[2].score += 10;
+                }
+                if (world[NS[2].y][NS[2].x] == 3) {
+                    NS[2].score += 5;
+                }
+                if (world[NS[2].y][NS[2].x] == 4) {
+                    NS[2].score += 1;
+                }
+                world[NS[2].y][NS[2].x] = 0;
+                io.emit('move_Ninja3', NS[2], ninjas, controlsDict[3])
             }
-            if (world[NS[3].y][NS[3].x] == 4) {
-                NS[3].score += 1;
+            if (NS[3].name == user) {
+                if (world[NS[3].y - 1][NS[3].x] != 1) {
+                    ninjaman4.y--;
+                }
+                if (world[NS[3].y][NS[3].x] == 2) {
+                    NS[3].score += 10;
+                }
+                if (world[NS[3].y][NS[3].x] == 3) {
+                    NS[3].score += 5;
+                }
+                if (world[NS[3].y][NS[3].x] == 4) {
+                    NS[3].score += 1;
+                }
+                world[NS[3].y][NS[3].x] = 0;
+                io.emit('move_Ninja4', NS[3], ninjas, controlsDict[3])
             }
-            world[NS[3].y][NS[3].x] = 0;
-            io.emit('move_Ninja4', NS[3], ninjas, controlsDict[1])
         }
+            io.emit('build_World', world)
+        })
+
+        // DOWN........................................................................................................................
+
+        socket.on('down', function (user) {
+            if (ninjas[3]) {
+            if (NS[0].name == user) {
+                console.log(user, 'look')
+                if (world[NS[0].y + 1][NS[0].x] != 1) {
+                    ninjaman1.y++;
+                }
+                if (world[NS[0].y][NS[0].x] == 2) {
+                    NS[1].score -= 10;
+                    console.log(NS[0].score)
+                }
+                if (world[NS[0].y][NS[0].x] == 3) {
+                    NS[0].score += 5;
+                    console.log(NS[0].score)
+                }
+                if (world[NS[0].y][NS[0].x] == 4) {
+                    NS[0].score += 1;
+                    console.log(NS[0].score)
+                }
+                world[NS[0].y][NS[0].x] = 0;
+                io.emit('move_Ninja1', NS[0], ninjas, controlsDict[4])
+            }
+            if (NS[1].name == user) {
+                if (world[NS[1].y + 1][NS[1].x] != 1) {
+                    ninjaman2.y++;
+                }
+                if (world[NS[1].y][NS[1].x] == 2) {
+                    NS[1].score += 10;
+                }
+                if (world[NS[1].y][NS[1].x] == 3) {
+                    NS[1].score += 5;
+                }
+                if (world[NS[1].y][NS[1].x] == 4) {
+                    NS[1].score += 1;
+                }
+                world[NS[1].y][NS[1].x] = 0;
+                io.emit('move_Ninja2', NS[1], ninjas, controlsDict[4])
+            }
+            if (NS[2].name == user) {
+                if (world[NS[2].y + 1][NS[2].x] != 1) {
+                    ninjaman3.y++;
+                }
+                if (world[NS[2].y][NS[2].x] == 2) {
+                    NS[2].score += 10;
+                }
+                if (world[NS[2].y][NS[2].x] == 3) {
+                    NS[2].score += 5;
+                }
+                if (world[NS[2].y][NS[2].x] == 4) {
+                    NS[2].score += 1;
+                }
+                world[NS[2].y][NS[2].x] = 0;
+                io.emit('move_Ninja3', NS[2], ninjas, controlsDict[4])
+            }
+            if (NS[3].name == user) {
+                if (world[NS[3].y + 1][NS[3].x] != 1) {
+                    ninjaman4.y++;
+                }
+                if (world[NS[3].y][NS[3].x] == 2) {
+                    NS[3].score += 10;
+                }
+                if (world[NS[3].y][NS[3].x] == 3) {
+                    NS[3].score += 5;
+                }
+                if (world[NS[3].y][NS[3].x] == 4) {
+                    NS[3].score += 1;
+                }
+                world[NS[3].y][NS[3].x] = 0;
+                io.emit('move_Ninja4', NS[3], ninjas, controlsDict[4])
+            }
+        }
+            io.emit('build_World', world)
+        })
         io.emit('build_World', world)
-    })
-
-    // RIGHT........................................................................................................................
-
-    socket.on('right', function (user) {
-
-        if (NS[0].name == user) {
-            console.log(user, 'look')
-            if (world[NS[0].y][NS[0].x + 1] != 1) {
-                ninjaman1.x++;
-            }
-            if (world[NS[0].y][NS[0].x] == 2) {
-                NS[0].score += 10;
-            }
-            if (world[NS[0].y][NS[0].x] == 3) {
-                NS[0].score += 5;
-            }
-            if (world[NS[0].y][NS[0].x] == 4) {
-                NS[0].score += 1;
-            }
-            world[NS[0].y][NS[0].x] = 0;
-            io.emit('move_Ninja1', NS[0], ninjas, controlsDict[2])
-        }
-        if (NS[1].name == user) {
-            if (world[NS[1].y][NS[1].x + 1] != 1) {
-                ninjaman2.x++;
-            }
-            if (world[NS[1].y][NS[1].x] == 2) {
-                NS[1].score += 10;
-            }
-            if (world[NS[1].y][NS[1].x] == 3) {
-                NS[1].score += 5;
-            }
-            if (world[NS[1].y][NS[1].x] == 4) {
-                NS[1].score += 1;
-            }
-            world[NS[1].y][NS[1].x] = 0;
-            io.emit('move_Ninja2', NS[1], ninjas, controlsDict[2])
-        }
-        if (NS[2].name == user) {
-            if (world[NS[2].y][NS[2].x + 1] != 1) {
-                ninjaman3.x++;
-            }
-            if (world[NS[2].y][NS[2].x] == 2) {
-                NS[2].score += 10;
-            }
-            if (world[NS[2].y][NS[2].x] == 3) {
-                NS[2].score += 5;
-            }
-            if (world[NS[2].y][NS[2].x] == 4) {
-                NS[2].score += 1;
-            }
-            world[NS[2].y][NS[2].x] = 0;
-            io.emit('move_Ninja3', NS[2], ninjas, controlsDict[2])
-        }
-        if (NS[3].name == user) {
-            if (world[NS[3].y][NS[3].x + 1] != 1) {
-                ninjaman4.x++;
-            }
-            if (world[NS[3].y][NS[3].x] == 2) {
-                NS[3].score += 10;
-            }
-            if (world[NS[3].y][NS[3].x] == 3) {
-                NS[3].score += 5;
-            }
-            if (world[NS[3].y][NS[3].x] == 4) {
-                NS[3].score += 1;
-            }
-            world[NS[3].y][NS[3].x] = 0;
-            io.emit('move_Ninja4', NS[3], ninjas, controlsDict[2])
-        }
-        io.emit('build_World', world)
-    })
-
-    // UP........................................................................................................................
-
-    socket.on('up', function (user) {
-
-        if (NS[0].name == user) {
-            if (world[NS[0].y - 1][NS[0].x] != 1) {
-                ninjaman1.y--;
-            }
-            if (world[NS[0].y][NS[0].x] == 2) {
-                NS[1].score -= 10;
-            }
-            if (world[NS[0].y][NS[0].x] == 3) {
-                NS[0].score += 5;
-            }
-            if (world[NS[0].y][NS[0].x] == 4) {
-                NS[0].score += 1;
-            }
-            world[NS[0].y][NS[0].x] = 0;
-            io.emit('move_Ninja1', NS[0], ninjas, controlsDict[3])
-        }
-        if (NS[1].name == user) {
-            if (world[NS[1].y - 1][NS[1].x] != 1) {
-                ninjaman2.y--;
-            }
-            if (world[NS[1].y][NS[1].x] == 2) {
-                NS[1].score += 10;
-            }
-            if (world[NS[1].y][NS[1].x] == 3) {
-                NS[1].score += 5;
-            }
-            if (world[NS[1].y][NS[1].x] == 4) {
-                NS[1].score += 1;
-            }
-            world[NS[1].y][NS[1].x] = 0;
-            io.emit('move_Ninja2', NS[1], ninjas, controlsDict[3])
-        }
-        if (NS[2].name == user) {
-            if (world[NS[2].y - 1][NS[2].x] != 1) {
-                ninjaman3.y--;
-            }
-            if (world[NS[2].y][NS[2].x] == 2) {
-                NS[2].score += 10;
-            }
-            if (world[NS[2].y][NS[2].x] == 3) {
-                NS[2].score += 5;
-            }
-            if (world[NS[2].y][NS[2].x] == 4) {
-                NS[2].score += 1;
-            }
-            world[NS[2].y][NS[2].x] = 0;
-            io.emit('move_Ninja3', NS[2], ninjas, controlsDict[3])
-        }
-        if (NS[3].name == user) {
-            if (world[NS[3].y - 1][NS[3].x] != 1) {
-                ninjaman4.y--;
-            }
-            if (world[NS[3].y][NS[3].x] == 2) {
-                NS[3].score += 10;
-            }
-            if (world[NS[3].y][NS[3].x] == 3) {
-                NS[3].score += 5;
-            }
-            if (world[NS[3].y][NS[3].x] == 4) {
-                NS[3].score += 1;
-            }
-            world[NS[3].y][NS[3].x] = 0;
-            io.emit('move_Ninja4', NS[3], ninjas, controlsDict[3])
-        }
-        io.emit('build_World', world)
-    })
-
-    // DOWN........................................................................................................................
-
-    socket.on('down', function (user) {
-
-        if (NS[0].name == user) {
-            console.log(user, 'look')
-            if (world[NS[0].y + 1][NS[0].x] != 1) {
-                ninjaman1.y++;
-            }
-            if (world[NS[0].y][NS[0].x] == 2) {
-                NS[1].score -= 10;
-                console.log(NS[0].score)
-            }
-            if (world[NS[0].y][NS[0].x] == 3) {
-                NS[0].score += 5;
-                console.log(NS[0].score)
-            }
-            if (world[NS[0].y][NS[0].x] == 4) {
-                NS[0].score += 1;
-                console.log(NS[0].score)
-            }
-            world[NS[0].y][NS[0].x] = 0;
-            io.emit('move_Ninja1', NS[0], ninjas, controlsDict[4])
-        }
-        if (NS[1].name == user) {
-            if (world[NS[1].y + 1][NS[1].x] != 1) {
-                ninjaman2.y++;
-            }
-            if (world[NS[1].y][NS[1].x] == 2) {
-                NS[1].score += 10;
-            }
-            if (world[NS[1].y][NS[1].x] == 3) {
-                NS[1].score += 5;
-            }
-            if (world[NS[1].y][NS[1].x] == 4) {
-                NS[1].score += 1;
-            }
-            world[NS[1].y][NS[1].x] = 0;
-            io.emit('move_Ninja2', NS[1], ninjas, controlsDict[4])
-        }
-        if (NS[2].name == user) {
-            if (world[NS[2].y + 1][NS[2].x] != 1) {
-                ninjaman3.y++;
-            }
-            if (world[NS[2].y][NS[2].x] == 2) {
-                NS[2].score += 10;
-            }
-            if (world[NS[2].y][NS[2].x] == 3) {
-                NS[2].score += 5;
-            }
-            if (world[NS[2].y][NS[2].x] == 4) {
-                NS[2].score += 1;
-            }
-            world[NS[2].y][NS[2].x] = 0;
-            io.emit('move_Ninja3', NS[2], ninjas, controlsDict[4])
-        }
-        if (NS[3].name == user) {
-            if (world[NS[3].y + 1][NS[3].x] != 1) {
-                ninjaman4.y++;
-            }
-            if (world[NS[3].y][NS[3].x] == 2) {
-                NS[3].score += 10;
-            }
-            if (world[NS[3].y][NS[3].x] == 3) {
-                NS[3].score += 5;
-            }
-            if (world[NS[3].y][NS[3].x] == 4) {
-                NS[3].score += 1;
-            }
-            world[NS[3].y][NS[3].x] = 0;
-            io.emit('move_Ninja4', NS[3], ninjas, controlsDict[4])
-        }
-        io.emit('build_World', world)
-    })
-    io.emit('build_World', world)
-    io.emit('move_Ninja1', NS[0], ninjas)
-    io.emit('move_Ninja2', NS[1], ninjas)
+        io.emit('move_Ninja1', NS[0], ninjas)
+        io.emit('move_Ninja2', NS[1], ninjas)
 })
 
 // End of Controls
