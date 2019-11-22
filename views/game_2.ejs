@@ -6,9 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Game #2</title>
     <link rel="stylesheet" href="css/game_2.css" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Barriecito|Monoton|Press+Start+2P|Turret+Road|Unica+One|VT323&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo+2|Press+Start+2P&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -24,7 +22,7 @@
         $(document).ready(function () {
             socket.emit('user_entered', name)
             socket.on('enter_msg', function (data) {
-                $("#msgboard").append('<p class="welcome">' + data + ' has entered the game</p>')
+                $("#msgboard").append('<p class="opponent">' + data + ' has entered the game</p>')
             })
             $('#msgboard').append('<p class="welcome"> Welcome ' + name + '!</p>')
             $('#sub').click(function () {
@@ -34,9 +32,15 @@
             socket.on('all_msgs', function (data) {
                 console.log(data)
                 if(data.sender == name){
-                    $('#msgboard').append('<p><span class="color">' + data.sender + ':</span> ' + data.msg + '</p>')
+                    $('.msgboard').append('<p class="me_msg"><span class="color">' + data.sender + ':</span> ' + data.msg + '</p>')
+                    $('.msgboard').animate({
+                        scrollTop: $('.msgboard').get(0).scrollHeight
+                    }, 1000);
                 }else{
-                    $('#msgboard').append('<p><span class="color1">' + data.sender + ':</span> ' + data.msg + '</p>')
+                    $('.msgboard').append('<p class="other_msg"><span class="color1">' + data.sender + ':</span> ' + data.msg + '</p>')
+                    $('.msgboard').animate({
+                        scrollTop: $('.msgboard').get(0).scrollHeight
+                    }, 1000);
                 }
             })
             $('#rock').click(function(){
@@ -68,16 +72,17 @@
                 if(name == data.winner){
                     my_scoreboard ++;
                     console.log(my_scoreboard);
-                    $("<p id='win'>You WON!</p>").hide().appendTo("#world").delay(3000).fadeIn().delay(2500).fadeOut();
+                    $("<p id='win'>You WON! Now rub it in your opponents face by sending them a message</p><img src='images/winning.png' alt='' width='100px'>").hide().appendTo("#world").delay(4000).fadeIn().delay(2500).fadeOut();
+                    $("#score").html('<h4 class="">Your Score: '+my_scoreboard+'</h4>')
                 }else{
-                    $("<p id='lose'>You LOST!</p>").hide().appendTo("#world").delay(3000).fadeIn().delay(2500).fadeOut();
+                    $("<p id='lose'>You lost, LOSER! Try not to cry about it</p><img src='images/cry_baby.png'  alt='' width='100px'>'").hide().appendTo("#world").delay(4000).fadeIn().delay(2500).fadeOut();
                 }
             })
             socket.on('tie_game', function(){
                 $('#rock').attr("disabled", false)
                 $('#paper').attr("disabled", false)
                 $('#scissors').attr("disabled", false)
-                $("<p>TIE GAME</p>").hide().appendTo("#world").delay(3000).fadeIn().delay(2500).fadeOut();
+                $("<p id='tie'>TIE GAME</p>").hide().appendTo("#world").delay(3000).fadeIn().delay(2500).fadeOut();
             })
 
         })
@@ -87,18 +92,18 @@
     <div class=header><%- include header.ejs %></div>
     <div class="container col-12" align="center"">
         <div id="world">
-            
+            <h4 id="score">Your Score: 0</h4>
             <button id='rock'><img src="images/rock_png.png" alt=""></button>
             <button id='paper'><img src="images/paper.png" alt=""></button>
             <button id='scissors'><img src="images/scissors_png.png" alt=""></button>
         </div>
         <div class="chatroom">
-            <div class="msgboard">
+            <div class="msgboard pl-2 pt-1">
                 <p id='msgboard'></p>
             </div>
             <div class='form'>
                 <input type="text" id="msg">
-                <input type="button" class='btn btn-warning' id='sub' value='Send'>
+                <input type="button" class='btn btn-warning' id='sub' value='Send' class='form-control'>
             </div>
         </div>
     </div>

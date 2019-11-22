@@ -72,13 +72,16 @@
 
 }
 .welcome{
-    font-family: 'Unica One', cursive;
-    color: rgb(252, 74, 3)
+    font-family: 'Exo 2', sans-serif;
+    color: rgb(252, 74, 3);
 }
-
+.opponent{
+    font-family: 'Exo 2', sans-serif;
+    color: rgb(9, 19, 117);
+}
 .chatroom{
     display: inline-block;
-    border: black 1px solid;
+    border: black 1px dotted;
     margin-left: 10px;
     height: 680px;
     width: 400px
@@ -91,20 +94,38 @@
 
 .msgboard{
     display:inline-block;
-    overflow: scroll;
     width: 400px;
     text-align: left;
     height: 600px;
+    padding: 5px;
+    overflow-y: scroll;
 }
 .form{
     vertical-align: bottom;
+    width: 300px;
+    text-align: center;
 }
 
 .color{
-    color: red;
+    color:  rgb(252, 74, 3);
+    font-family: 'Exo 2', sans-serif;
+
 }
+
 .color1{
-    color: blue;
+    color: rgb(9, 19, 117);
+    font-family: 'Exo 2', sans-serif;
+
+}
+
+.other_msg{
+    font-style: italic;
+    width: 375px;
+    max-height: 400px;
+}
+.me_msg{
+    width: 375px;
+    max-height: 400px;
 }
 .rotateleft {
     transform: rotate(180deg);

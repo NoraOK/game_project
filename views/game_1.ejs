@@ -7,9 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Game #1</title>
     <link rel="stylesheet" href="css/game_1.css" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Barriecito|Monoton|Press+Start+2P|Turret+Road|Unica+One|VT323&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo+2|Press+Start+2P&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -137,9 +135,15 @@
             socket.on('all_msgs', function (data) {
                 console.log(data)
                 if (data.sender == name) {
-                    $('#msgboard').append('<p><span class="color">' + data.sender + ':</span> ' + data.msg + '</p>')
+                    $('.msgboard').append('<p class="me_msg"><span class="color">' + data.sender + ':</span> ' + data.msg + '</p>')
+                    $('.msgboard').animate({
+                        scrollTop: $('.msgboard').get(0).scrollHeight
+                    }, 1000);
                 } else {
-                    $('#msgboard').append('<p><span class="color1">' + data.sender + ':</span> ' + data.msg + '</p>')
+                    $('.msgboard').append('<p class="other_msg"><span class="color1">' + data.sender + ':</span> ' + data.msg + '</p>')
+                    $('.msgboard').animate({
+                        scrollTop: $('.msgboard').get(0).scrollHeight
+                    }, 1000);
                 }
             })
 
@@ -218,7 +222,7 @@
             </div>
             <div class='form'>
                 <input type="text" id="msg">
-                <input type="button" class='btn btn-warning' id='sub' value='Send'>
+                <input type="button" class='btn btn-warning' id='sub' value='Send' class='form-control'>
             </div>
         </div>
     </div>
