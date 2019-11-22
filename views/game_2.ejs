@@ -15,7 +15,7 @@
 
         var socket = io();
 
-        var name = prompt('Enter you name to play:');
+        var name = prompt('Enter your name to play:');
 
         var my_scoreboard = 0;
 
@@ -72,7 +72,7 @@
                 if(name == data.winner){
                     my_scoreboard ++;
                     console.log(my_scoreboard);
-                    $("<p id='win'>You WON! Now rub it in your opponents face by sending them a message</p><img src='images/winning.png' alt='' width='100px'>").hide().appendTo("#world").delay(4000).fadeIn().delay(2500).fadeOut();
+                    $("<img src='images/winning.png' alt='' width='100px'><p id='win'>You WON! Now rub it in your opponents face by sending them a message</p>").hide().appendTo("#world").delay(4000).fadeIn().delay(2500).fadeOut();
                     $("#score").html('<h4 class="">Your Score: '+my_scoreboard+'</h4>')
                 }else{
                     $("<p id='lose'>You lost, LOSER! Try not to cry about it</p><img src='images/cry_baby.png'  alt='' width='100px'>'").hide().appendTo("#world").delay(4000).fadeIn().delay(2500).fadeOut();

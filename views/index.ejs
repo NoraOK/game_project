@@ -11,6 +11,7 @@
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
     <script type="text/javascript">
 
     </script>
@@ -19,16 +20,26 @@
  <%- include header.ejs %>
 
     <div class="container col-12">
-        <h3></h3>
-        <div class="tron col-3">
-            <a href="/game_1" class='game_1'>
-                <p>Click here to play PACMAN!</p>
-            </a>
-        </div>
-        <div class="tron col-3">
-            <a href="/game_2" class='game_1'>
-                <p>Click here to play ROCK, PAPER, SCISSORS!</p>
-            </a>
+        <!-- <h3 class='mission_statement col-4'><p>Welcome to Game City!</p>
+            <ul>
+                <li>Play our classic games</li>
+                <li>Chat with your opponent(s)</li>
+                <li>Rub it in when you win</li> 
+            </ul>
+        </h3> -->
+        <div class="buttons">
+            <img src="images/pacman_game.png" alt="" width="200px">
+            <div class="tron col-3 game_1">
+                <a href="/game_1" class='game_1'>
+                    <p>Click here to play PACMAN!</p>
+                </a>
+            </div>
+            <img src="images/rock-paper.png" alt="" width="200px">
+            <div class="tron col-3">
+                <a href="/game_2" class='game_1'>
+                    <p>Click here to play ROCK, PAPER, SCISSORS!</p>
+                </a>
+            </div>
         </div>
     </div>
 </body>

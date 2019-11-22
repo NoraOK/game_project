@@ -17,3 +17,23 @@
     color: white;
     font-family: 'Exo 2', sans-serif;
 }
+
+.mission_statement{
+    text-align: center;
+    margin-left: 33%;
+    margin-top: 40px;
+    font-family: 'Exo 2', sans-serif;
+    color: rgb(9, 19, 117);
+}
+
+.mission_statement p{
+    padding-left: 20px;
+}
+
+ul{
+    list-style: none;
+
+}
+
+
+
