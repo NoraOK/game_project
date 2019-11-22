@@ -82,7 +82,7 @@
 }
 .chatroom{
     display: inline-block;
-    border: black 1px dotted;
+    border: #D042AF 5px solic;
     margin-left: 10px;
     height: 680px;
     width: 400px
@@ -123,10 +123,14 @@
     font-style: italic;
     width: 375px;
     max-height: 400px;
+    font-family: 'Source Code Pro', monospace;
+
 }
 .me_msg{
     width: 375px;
     max-height: 400px;
+    font-family: 'Source Code Pro', monospace;
+
 }
 .rotateleft {
     transform: rotate(180deg);

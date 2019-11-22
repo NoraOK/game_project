@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Game #2</title>
     <link rel="stylesheet" href="css/game_2.css" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Exo+2|Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Exo+2|Press+Start+2P|Source+Code+Pro&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -48,21 +48,21 @@
                 $('#paper').attr("disabled", true)
                 $('#scissors').attr("disabled", true)
                 socket.emit('push_rock', {player: name, val: 'rock', count: 0})
-                $("<p id='rock_msg'>You chose rock. Let's see if you beat your opponent!</p>").hide().appendTo("#world").fadeIn().delay(2000).fadeOut()
+                $("<p id='rock_msg' class='chose'>You chose rock. Let's see if you beat your opponent!</p>").hide().appendTo("#world").fadeIn().delay(2000).fadeOut()
             })
             $('#paper').click(function(){
                 $('#rock').attr("disabled", true)
                 $('#paper').attr("disabled", true)
                 $('#scissors').attr("disabled", true)
                 socket.emit('push_paper', {player: name, val: 'paper', count: 0})
-                $("<p id='paper_msg'>You chose paper. Let's see if you beat your opponent!</p>").hide().appendTo("#world").fadeIn().delay(2000).fadeOut()
+                $("<p id='paper_msg' class='chose'>You chose paper. Let's see if you beat your opponent!</p>").hide().appendTo("#world").fadeIn().delay(2000).fadeOut()
             })
             $('#scissors').click(function(){
                 $('#rock').attr("disabled", true)
                 $('#paper').attr("disabled", true)
                 $('#scissors').attr("disabled", true)
                 socket.emit('push_scissors', {player: name, val: 'scissors', count: 0})
-                $("<p id='scissors_msg'>You chose scissors. Let's see if you beat your opponent!</p>").hide().appendTo("#world").fadeIn().delay(2000).fadeOut()
+                $("<p id='scissors_msg' class='chose'>You chose scissors. Let's see if you beat your opponent!</p>").hide().appendTo("#world").fadeIn().delay(2000).fadeOut()
             })
             socket.on('player_won', function(data){
                 $('#rock').attr("disabled", false)
@@ -72,17 +72,17 @@
                 if(name == data.winner){
                     my_scoreboard ++;
                     console.log(my_scoreboard);
-                    $("<img src='images/winning.png' alt='' width='100px'><p id='win'>You WON! Now rub it in your opponents face by sending them a message</p>").hide().appendTo("#world").delay(4000).fadeIn().delay(2500).fadeOut();
-                    $("#score").html('<h4 class="">Your Score: '+my_scoreboard+'</h4>')
+                    $("<p><img src='images/winning.png' alt='' width='100px'></p><p id='win'>You WON! Now rub it in your opponents face by sending them a message</p>").hide().appendTo("#world").delay(4000).fadeIn().delay(4000).fadeOut();
+                    $("#score").html('<h4 class="score">Your Score: '+my_scoreboard+'</h4>')
                 }else{
-                    $("<p id='lose'>You lost, LOSER! Try not to cry about it</p><img src='images/cry_baby.png'  alt='' width='100px'>'").hide().appendTo("#world").delay(4000).fadeIn().delay(2500).fadeOut();
+                    $("<p id='lose'>You lost, LOSER! Try not to cry about it</p><img src='images/cry_baby.png'  alt='' width='100px'>'").hide().appendTo("#world").delay(4000).fadeIn().delay(4000).fadeOut();
                 }
             })
             socket.on('tie_game', function(){
                 $('#rock').attr("disabled", false)
                 $('#paper').attr("disabled", false)
                 $('#scissors').attr("disabled", false)
-                $("<p id='tie'>TIE GAME</p>").hide().appendTo("#world").delay(3000).fadeIn().delay(2500).fadeOut();
+                $("<p id='tie'>TIE GAME.You're both losers!</p>").hide().appendTo("#world").delay(4000).fadeIn().delay(4000).fadeOut();
             })
 
         })
