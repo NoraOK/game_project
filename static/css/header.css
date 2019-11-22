@@ -14,7 +14,7 @@ font-family: 'Barriecito', cursive; */
     border-radius: 10px;
     text-align: center;
     margin-left: 15%;
-    text-shadow: 4px 4px gray;
+    text-shadow: 4px 4px 4px gray;
 }
 
 header a, header a:link, header a:visited, header a:hover{
@@ -24,9 +24,11 @@ header a, header a:link, header a:visited, header a:hover{
 }
 
 #slogan{
-    font-family: 'Unica One', cursive;   
+    font-family: 'Press Start 2P', cursive;  
     text-align: center;
     font-size: 32px;
+    text-shadow: 2px 2px 2px gray;
+
 }
 
 header{

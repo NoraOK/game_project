@@ -3,7 +3,7 @@
     text-align: center;
     margin-left: 37%;
     background-color: rgba(252, 74, 3);
-    box-shadow: 2px 2px gray;
+    box-shadow: 4px 4px 4px gray;
     border-radius: 10px;
     height: 100px;
     padding-top: 35px;
@@ -15,4 +15,5 @@
 
 .tron p{
     color: white;
-    font-family: 'Unica One', cursive;}
+    font-family: 'Exo 2', sans-serif;
+}
