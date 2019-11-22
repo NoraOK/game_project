@@ -1,23 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Home</title>
     <link rel="stylesheet" href="css/index.css" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Barriecito|Monoton|Press+Start+2P|Turret+Road|Unica+One|VT323&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Barriecito|Monoton|Press+Start+2P|Turret+Road|Unica+One|VT323&display=swap"
+        rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+
     <script type="text/javascript">
 
     </script>
 </head>
+
 <body>
- <%- include header.ejs %>
+    <%- include header.ejs %>
 
     <div class="container col-12">
         <!-- <h3 class='mission_statement col-4'><p>Welcome to Game City!</p>
@@ -27,15 +31,17 @@
                 <li>Rub it in when you win</li> 
             </ul>
         </h3> -->
-        <div class="buttons">
-            <img src="images/pacman_game.png" alt="" width="200px">
-            <div class="tron col-3 game_1">
+        <div class='jumbo' align='center'>
+            <img src="images/pacman_game.png" alt="" width="460px" height='250px'>
+            <div class="tron col-7 game_1">
                 <a href="/game_1" class='game_1'>
                     <p>Click here to play PACMAN!</p>
                 </a>
             </div>
-            <img src="images/rock-paper.png" alt="" width="200px">
-            <div class="tron col-3">
+        </div>
+        <div class='jumbo' align='center'>
+            <img src="images/rock-paper.png" alt="" width="460px" height='250px'>
+            <div class="tron col-7">
                 <a href="/game_2" class='game_1'>
                     <p>Click here to play ROCK, PAPER, SCISSORS!</p>
                 </a>
@@ -43,4 +49,5 @@
         </div>
     </div>
 </body>
+
 </html>

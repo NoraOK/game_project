@@ -69,8 +69,8 @@
     font-family: 'Exo 2', sans-serif;
 }
 .container{
-    padding-bottom: 5px;
-
+    background-image: linear-gradient(to bottom right, rgb(9, 3, 48), rgba(18, 39, 158, 0.8));
+    height: 100vw;
 }
 .welcome{
     font-family: 'Exo 2', sans-serif;
@@ -85,7 +85,9 @@
     border: black 1px dotted;
     margin-left: 10px;
     height: 680px;
-    width: 400px
+    width: 400px;
+    /* background-image: linear-gradient(to bottom right, rgb(9, 3, 48), rgba(18, 39, 158, 0.8)); */
+    background-color: transparent;
 }
 
 #world{
@@ -114,7 +116,7 @@
 }
 
 .color1{
-    color: rgb(9, 19, 117);
+    color: rgb(175, 47, 143);
     font-family: 'Exo 2', sans-serif;
 
 }
@@ -123,10 +125,12 @@
     font-style: italic;
     width: 375px;
     max-height: 400px;
+    color: white;
 }
 .me_msg{
     width: 375px;
     max-height: 400px;
+    color:white;
 }
 .rotateleft {
     transform: rotate(180deg);
