@@ -60,12 +60,13 @@
 }
 .scoreboard{
     height: 40px;
-    width: 40px;
+    width: 200px;
     display: inline-block;
     background-size: contain;
     position: absolute;
     color: white;
     font-size: x-large;
+    font-family: 'Exo 2', sans-serif;
 }
 .container{
     padding-bottom: 5px;

@@ -63,16 +63,16 @@
 
         function drawScoreboard(player, ninjas) {
             if (player.name == ninjas[0]) {
-                $('#scoreboard1').text(player.score)
-            } 
+                $('#scoreboard1').text(ninjas[0]+"'s score: "+player.score)
+            }
             if (player.name == ninjas[1]) {
-                $('#scoreboard2').text(player.score)
-            } 
+                $('#scoreboard2').text(ninjas[1]+"'s score: "+player.score)
+            }
             if (player.name == ninjas[2]) {
-                $('#scoreboard3').text(player.score)
-            } 
+                $('#scoreboard3').text(ninjas[2]+"'s score: "+player.score)
+            }
             if (player.name == ninjas[3]) {
-                $('#scoreboard4').text(player.score)
+                $('#scoreboard4').text(ninjas[3]+"'s score: "+player.score)
             }
         }
 
@@ -86,7 +86,7 @@
                 "top": ninja1.top,
                 "left": ninja1.left,
             })
-            $('#pacman1').attr("class","ninjaman "+move+"")
+            $('#pacman1').attr("class", "ninjaman " + move + "")
             drawScoreboard(ninja1, ninjas)
         })
 
@@ -97,7 +97,7 @@
                 "top": ninja2.top,
                 "left": ninja2.left,
             })
-            $('#pacman2').attr("class","ninjaman "+move+"")
+            $('#pacman2').attr("class", "ninjaman " + move + "")
             drawScoreboard(ninja2, ninjas)
         })
 
@@ -108,7 +108,7 @@
                 "top": ninja3.top,
                 "left": ninja3.left,
             })
-            $('#pacman3').attr("class","ninjaman "+move+"")
+            $('#pacman3').attr("class", "ninjaman " + move + "")
             drawScoreboard(ninja3, ninjas)
         })
         socket.on('move_Ninja4', function (ninja4, ninjas, move) {
@@ -118,7 +118,7 @@
                 "top": ninja4.top,
                 "left": ninja4.left,
             })
-            $('#pacman4').attr("class","ninjaman "+move+"")
+            $('#pacman4').attr("class", "ninjaman " + move + "")
             drawScoreboard(ninja4, ninjas)
         })
 
@@ -197,21 +197,21 @@
 
         <div id='world'></div>
         <div id='scoreboard1' class='scoreboard' style='top: 0px; left:0px'>0</div>
-        <div id='scoreboard2' class='scoreboard' style='top: 0px; left:1200px'>0</div>
+        <div id='scoreboard2' class='scoreboard' style='top: 0px; left:1000px'>0</div>
         <div id='scoreboard3' class='scoreboard' style='top: 640px; left:0px'>0</div>
-        <div id='scoreboard4' class='scoreboard' style='top: 640px; left:1200px'>0</div>
+        <div id='scoreboard4' class='scoreboard' style='top: 640px; left:1000px'>0</div>
         <div id='ninjaman1' class='ninjaman'>
             <img id='pacman1' src='/images/pacman.png' height='40px' width='40px'>
         </div>
         <div id='ninjaman2' class='ninjaman'>
-            <img id='pacman2'src='/images/pacman.png' height='40px' width='40px'>
+            <img id='pacman2' src='/images/pacman.png' height='40px' width='40px'>
         </div>
         <div id='ninjaman3' class='ninjaman'>
-            <img id='pacman3'src='/images/pacman.png' height='40px' width='40px'>
+            <img id='pacman3' src='/images/pacman.png' height='40px' width='40px'>
         </div>
 
         <div id='ninjaman4' class='ninjaman'>
-            <img id='pacman4'src='/images/pacman.png' height='40px' width='40px'>
+            <img id='pacman4' src='/images/pacman.png' height='40px' width='40px'>
         </div>
 
 
