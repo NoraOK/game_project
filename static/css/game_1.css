@@ -19,7 +19,7 @@
     height: 40px;
     width: 40px;
     display: inline-block;
-    background-image: url('sushi.png');
+    background-image: url('images/sushi.png');
     background-size: contain;
 }
 
@@ -28,7 +28,7 @@
     height: 40px;
     width: 40px;
     display: inline-block;
-    background-image: url('onigiri.png');
+    background-image: url('images/onigiri.png');
     background-size: contain;
 }
 
@@ -39,12 +39,12 @@
     display: inline-block;
 }
 
-#ninjaman {
-    background-color: black;
+.ninjaman {
+    background-color: red;
     height: 40px;
     width: 40px;
     display: inline-block;
-    background-image: url('ninja.gif');
+    background-image: url('/static/images/pacman.png');
     background-size: contain;
     position: absolute;
 }

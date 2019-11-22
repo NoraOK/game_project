@@ -10,7 +10,6 @@
     <link
         href="https://fonts.googleapis.com/css?family=Barriecito|Monoton|Press+Start+2P|Turret+Road|Unica+One|VT323&display=swap"
         rel="stylesheet">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -50,11 +49,35 @@
 
         // Create Player
 
+        function drawNinjaman(player) {
+            player.top = player.y * 40 + 'px'
+            player.left = player.x * 40 + 'px'
+        }
+
+
         socket.on('build_World', function (worldData) {
-            console.log(worldData);
             $('#world').html(drawWorld(worldData));
-            console.log('hello');
         })
+        socket.on('move_Ninja1', function (ninja1, ninjas) {
+            console.log(ninja1, 'logging_all_ninjas')
+            drawNinjaman(ninja1)
+            console.log(ninja1.name, "player 1 moved")
+            $('#ninjaman1').css({
+                "top": ninja1.top,
+                "left": ninja1.left,
+            })
+        })
+
+        socket.on('move_Ninja2', function (ninja2, ninjas) {
+            console.log(ninja2, 'logging_all_ninjas')
+            drawNinjaman(ninja2)
+            console.log(ninja2.name, "player 2 moved")
+            $('#ninjaman2').css({
+                "top": ninja2.top,
+                "left": ninja2.left,
+            })
+        })
+
         $(document).ready(function () {
             socket.emit('user_entered', name)
             socket.on('enter_msg', function (data) {
@@ -67,21 +90,66 @@
             })
             socket.on('all_msgs', function (data) {
                 console.log(data)
-                if(data.sender == name){
+                if (data.sender == name) {
                     $('#msgboard').append('<p><span class="color">' + data.sender + ':</span> ' + data.msg + '</p>')
-                }else{
+                } else {
                     $('#msgboard').append('<p><span class="color1">' + data.sender + ':</span> ' + data.msg + '</p>')
                 }
             })
+
+            // Controls
+
+            document.onkeydown = function (e) {
+                if (e.keyCode == 37) {
+                    console.log(name)
+                    console.log('left')
+                    socket.emit('left', name)
+                }
+                if (e.keyCode == 39) {
+                    console.log(name)
+                    console.log('right')
+                    socket.emit('right', name)
+                }
+                if (e.keyCode == 38) {
+                    console.log(name)
+                    console.log('up')
+                    socket.emit('up', name)
+
+                }
+                if (e.keyCode == 40) {
+                    console.log(name)
+                    console.log('down')
+                    socket.emit('down', name)
+
+                }
+                // if (world[ninjaman.y][ninjaman.x] == 2) {
+                //     ninjaman.score += 10;
+                //     console.log(ninjaman.score)
+                // }
+                // if (world[ninjaman.y][ninjaman.x] == 3) {
+                //     ninjaman.score += 5;
+                //     console.log(ninjaman.score)
+                // }
+            }
+
+
+
         })
+
 
     </script>
 </head>
 
 <body>
     <%- include header.ejs %>
-    <div class="container col-12" align="center">
+    <div class="container col-12" align="left">
+
+
         <div id='world'></div>
+        <div id='ninjaman1' class='ninjaman'></div>
+        <div id='ninjaman2' class='ninjaman'></div>
+
+
         <div class="chatroom">
             <div class="msgboard">
                 <p id='msgboard'></p>
