@@ -29,7 +29,26 @@ var world = [
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
 ];
 
+ninjas = []
 
+NS = [
+    ninjaman1 = {
+        name: "",
+        x: 1,
+        y: 1,
+        score: 0,
+        top: 0,
+        left: 0,
+    },
+    ninjaman2 = {
+        name: "",
+        x: 29,
+        y: 1,
+        score: 0,
+        top: 0,
+        left: 0,
+    },
+]
 
 app.get('/', (req, res) => {
     res.render('index')
@@ -40,11 +59,28 @@ app.get('/game_1', (req, res) => {
 });
 
 io.on('connection', function (socket) {
-    console.log('socket connected <3 <3 <3')
     socket.emit('build_World', world)
-    socket.on('user_entered', function(data){
+    console.log('socket connected <3 <3 <3')
+    socket.on('user_entered', function (data) {
+        var count = 0;
+        for (ninja in ninjas) {
+            count++;
+            if (count > 1) {
+                console.log('refresh')
+                ninjas = []
+            }
+        }
+        ninjas.push(data)
+        if (ninjas[1]) {
+            NS[1].name = ninjas[1]
+        } else {
+            NS[0].name = ninjas[0]
+        }
+        console.log(NS[0], NS[1], ninjas, "all ninjas")
+        io.emit('move_Ninja', NS[0], NS[1], ninjas)
         socket.broadcast.emit('enter_msg', data)
     })
+
     socket.on('sending_msg', function (data) {
         console.log(data);
         chat += data;
@@ -52,5 +88,76 @@ io.on('connection', function (socket) {
     })
 
 
+    // Controls
+
+    socket.on('left', function (user) {
+    
+        if (NS[0].name == user) {
+            console.log(user, 'look')
+            if (world[NS[0].y][NS[0].x - 1] != 1) {
+                ninjaman1.x--;
+            }
+            io.emit('move_Ninja1', NS[0], ninjas)
+        } else {
+            if (world[NS[1].y][NS[1].x - 1] != 1) {
+                ninjaman2.x--;
+            }
+            io.emit('move_Ninja2',NS[1], ninjas)
+        }
+        console.log(NS[0], NS[1], ninjas)
+    })
+
+    socket.on('right', function (user) {
+
+        if (NS[0].name == user) {
+            console.log(user, 'look')
+            if (world[NS[0].y][NS[0].x + 1] != 1) {
+                ninjaman1.x++;
+            }
+            io.emit('move_Ninja1', NS[0], ninjas)
+        } else {
+            if (world[NS[1].y][NS[1].x + 1] != 1) {
+                ninjaman2.x++;
+            }
+            io.emit('move_Ninja2',NS[1], ninjas)
+        }
+        console.log(ninjaman1, ninjaman2, ninjas)
+    })
+
+    socket.on('up', function (user) {
+     
+        if (NS[0].name == user) {
+            console.log(user, 'look')
+            if (world[NS[0].y - 1][NS[0].x] != 1) {
+                ninjaman1.y--;
+            }
+            io.emit('move_Ninja1', NS[0], ninjas)
+        } else {
+            if (world[NS[1].y - 1][NS[1].x] != 1) {
+                ninjaman2.y--;
+            }
+            io.emit('move_Ninja2',NS[1], ninjas)
+        }
+        console.log(ninjaman1, ninjaman2, ninjas)
+    })
+    socket.on('down', function (user) {
+
+        if (NS[0].name == user) {
+            console.log(user, 'look')
+            if (world[NS[0].y + 1][NS[0].x] != 1) {
+                ninjaman1.y++;
+            }
+            io.emit('move_Ninja1', NS[0], ninjas)
+        } else {
+            if (world[NS[1].y + 1][NS[1].x] != 1) {
+                ninjaman2.y++;
+            }
+            io.emit('move_Ninja2',NS[1], ninjas)
+        }
+        console.log(ninjaman1, ninjaman2, ninjas)
+    })
+    io.emit('move_Ninja1', NS[0], ninjas)
+    io.emit('move_Ninja2',NS[1], ninjas)
 })
 
+// End of Controls
